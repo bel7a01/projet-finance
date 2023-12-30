@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Taux moyen de placement des capitaux</title>
+
+  
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/business.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <style>
+        label {
+          color: white;
+        }
+
+        #divres{
+          margin-top: 6%;
+        }
+
+    </style>
+
+
+    <script>
+
+        function calculer() {
+         
+          var capitals= document.getElementsByName('capital');
+          var tauxinterets= document.getElementsByName('tauxinteret');
+          var periodesplacement= document.getElementsByName('periodeplacement');
+          var x=0;
+          var y=0;
+          interets=0;
+          
+          for(i = 0; i < capitals.length; i++) {
+            
+            x +=parseFloat(capitals[i].value*tauxinterets[i].value*periodesplacement[i].value);
+            interets +=parseFloat((capitals[i].value*tauxinterets[i].value*periodesplacement[i].value)/36000);
+          }
+
+           
+          for(i = 0; i < capitals.length; i++) {
+            
+            y +=parseFloat(capitals[i].value*periodesplacement[i].value);
+          }
+
+          tauxmoyen=parseFloat(x/y).toFixed(4);
+          interets =parseFloat(interets).toFixed(4);
+
+         
+         var resultat="<div style='display: inline-block;'><div class='card bg-light mb-3' style='width: 18rem;display: inline-block; margin: 15px:;'>"+
+                          "<div class='card-header'>Taux moyen de placement</div>"+
+                          "<div class='card-body'>"+
+                            "<h5 class='card-title'>"+tauxmoyen+"</h5>"+
+                          "</div>"+
+                        "</div>"+
+                        "<div class='card bg-light mb-3' style='width: 18rem;display: inline-block;margin: 15px;'>"+
+                          "<div class='card-header'>Intérêt totale</div>"+
+                          "<div class='card-body'>"+
+                            "<h5 class='card-title'>"+interets+"</h5>"+
+                          "</div>"+
+                        "</div></div>";
+         document.getElementById("divres").innerHTML=resultat;
+          
+
+
+        }
+
+        function ajouterplacement(){
+
+            var contenu= "<hr style='height:2px;border-width:0;color:gray;background-color:gray'><div class='form-group row'>"+                
+                            "<label class='col-sm-2 col-form-label'>Capital initial</label>"+
+                            "<div class='col-sm-10'>"+
+                              "<input name='capital' type='number' class='form-control' id='capital' placeholder='Capital initial' step='any' required>"+
+                            "</div>"+  
+                          "</div>"+
+                          "<div class='form-group row'>"+                   
+                            "<label class='col-sm-2 col-form-label'>Taux d'intérêt en %</label>"+
+                            "<div class='col-sm-10'>"+
+                              "<input name='tauxinteret' type='number' class='form-control' id='tauxinteret'  placeholder='Taux d intérêt en %' step='any' required>"+
+                            "</div>"+ 
+                          "</div>"+
+                          "<div class='form-group row'>"+                    
+                            "<label class='col-sm-2 col-form-label'>Période de placement en jours</label>"+
+                            "<div class='col-sm-10'>"+
+                              "<input name='periodeplacement' type='number' class='form-control' id='periodeplacement' placeholder='Période de placement' required>"+
+                            "</div>"+  
+                          "</div>";
+
+             document.getElementById("divaj").insertAdjacentHTML('beforeend', contenu);
+        }
+
+
+        function supprimerplacment(){
+            divsup = document.getElementById('divaj');
+            divsup.removeChild( divsup.lastElementChild);
+            divsup.removeChild( divsup.lastElementChild);
+            divsup.removeChild( divsup.lastElementChild);
+            divsup.removeChild( divsup.lastElementChild);
+        }
+
+      
+    </script>
+
+  </head>
+
+  <body>
+
+   
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+      
+    
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Accueil
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="placement bancaire.html">Placement bancaire</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="tauxmoyen.html">Taux moyen de placement des capitaux</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="emprunts.html">Emprunts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Taux moyen de placement des capitaux</h1>
+            <span>Calculer l'intérêt totale et le taux moyen de placement des capitaux</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="callback-form callback-services" style='margin: 0px;'>
+      <div class="container">
+        
+          <div class="col-md-12">
+            <div class="contact-form">
+              <form  onsubmit="calculer(); return false">
+                
+                  <div id="divaj" >
+
+                    <div class="form-group row">                    
+                      <label class="col-sm-2 col-form-label">Capital initial</label>
+                      <div class="col-sm-10">
+                        <input name="capital" type="number" class="form-control" id="capital" placeholder="Capital initial" step="any" required="">
+                      </div>  
+                    </div>
+
+                    <div class="form-group row">                    
+                      <label class="col-sm-2 col-form-label">Taux d'intérêt annuel en %</label>
+                      <div class="col-sm-10">
+                        <input name="tauxinteret" type="number" class="form-control" id="tauxinteret"  placeholder="Taux d'intérêt en %" step="any" required="">
+                      </div>  
+                    </div>
+
+                    <div class="form-group row">                    
+                      <label class="col-sm-2 col-form-label">Période de placement en jours</label>
+                      <div class="col-sm-10">
+                        <input name="periodeplacement" type="number" class="form-control" id="periodeplacement" placeholder="Période de placement" required="">
+                      </div>  
+                    </div>
+
+                  </div>  
+                      
+                  <div class="form-group row">
+                   <button onclick="ajouterplacement()" class="btn btn-info" style='margin:2em;' >Ajouter placement</button>
+                   <button onclick="supprimerplacment()" class="btn btn-danger" style='margin:2em;' >Supprimer placement</button>
+                  </div> 
+                  <div class="col-lg-12">
+                    <fieldset>
+                      <button type="submit" class="border-button" >Calculer</button>
+                    </fieldset>
+                  </div>
+
+                  <div id="divres">
+                    
+                  </div>
+                
+              </form>
+            </div>
+          </div>
+
+       
+      </div>
+    </div>
+
+    <div class="partners sub-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+ 
+ <script src="vendor/jquery/jquery.min.js"></script>
+ <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+ 
+ <script src="assets/js/custom.js"></script>
+ <script src="assets/js/owl.js"></script>
+ <script src="assets/js/slick.js"></script>
+ <script src="assets/js/accordions.js"></script>
+
+ <script language = "text/Javascript"> 
+   cleared[0] = cleared[1] = cleared[2] = 0; 
+   function clearField(t){                   
+   if(! cleared[t.id]){                      
+       cleared[t.id] = 1;  
+       t.value='';         
+       t.style.color='#fff';
+       }
+   }
+ </script>
+
+</body>
+</html>    
